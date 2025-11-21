@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Emotions Baby 💗</title>
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <style>
+
+        /* Smooth background transition */
+        body {
+            transition: background 0.6s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Select What You’re Feeling Baby 💞</h2>
+
+        <div class="emotion-container">
+            <button class="emotion-btn" data-emotion="happy">😊 Happy</button>
+            <button class="emotion-btn" data-emotion="sad">😢 Sad</button>
+            <button class="emotion-btn" data-emotion="excited">🤩 Excited</button>
+            <button class="emotion-btn" data-emotion="annoyed">😒 Annoyed</button>
+            <button class="emotion-btn" data-emotion="tensed">😬 Tensed</button>
+            <button class="emotion-btn" data-emotion="naughty">😏 Naughty</button>
+        </div>
+
+        <div class="emotion-message" id="emotionMessage"></div>
+
+        <button class="back-btn" style="margin-top: 25px;" onclick="window.location.href='final-page.html'">
+            Continue ➡️
+        </button>
+    </div>
+
+    <script>
+        const msgBox = document.getElementById("emotionMessage");
+
+        const emotions = {
+            happy: {
+                bg: "linear-gradient(135deg, #ffeaa7, #fab1a0)",
+                text: "You know how happy I am when you are happy. Your happiness is literally the only thing I ever want and I am very happy that you are happy right now. I love you so so so much. I promise to always keep you and make you happy and your happiness is my first priority. Nothing else matters to me more than this. 🌞💛"
+            },
+            sad: {
+                bg: "linear-gradient(135deg, #dfe6e9, #b2bec3)",
+                text: "Aww babe, what happened? Just know that whatever it is you are feeling, just know that I am right there with you hugging you really really tight and over the side of your cheeks ready to kiss you the moment your eyes stop reading this text!! 🤍🥺"
+            },
+            excited: {
+                bg: "linear-gradient(135deg, #ffbe76, #ff9f43)",
+                text: "WHAT IS IT!!! PLEASE TELL ME. COME HOME SOON!! I CANT WAIT TO KNOW WHAT IS SO EXCITING (I love that you are excited about something, you are my jaan and you deserve to be excited and happy) 🤩🧡"
+            },
+
+            annoyed: {
+                bg: "linear-gradient(135deg, #fab0b0, #ff7675)",
+                text: "What happened my laado? Kya hua? What is bothering you? Please tell me if I can fix it. Just know that I am right here and you can always come jump into my arms and tell me everything, I will kiss you and listen to you. 😚💋"
+            },
+            tensed: {
+                bg: "linear-gradient(135deg, #81ecec, #74b9ff)",
+                dynamic: true
+            },
+
+            naughty: {
+                bg: "linear-gradient(135deg, #ffb8e6, #ff6ec7)",
+                text: "Really? You're feeling naughty???? Oh goddd!!!!!! Come home soon!! I can't wait to do things to you and with you!! 😈💗"
+            }
+        };
+
+        document.querySelectorAll(".emotion-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const emotion = btn.dataset.emotion;
+                document.body.style.background = emotions[emotion].bg;
+
+                if (emotions[emotion].dynamic) {
+                    const now = new Date();
+
+                    // Target time for today → 2:30 PM IST
+                    const target = new Date();
+                    target.setHours(14, 30, 0, 0);
+
+                    // If already past 2:30 PM today, target next day
+                    if (now > target) {
+                        target.setDate(target.getDate() + 1);
+                    }
+
+                    const diffMs = target - now;
+                    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+                    const message = `Come home soon. Seeeee, just a little time is left now, only ${diffHours} hours and ${diffMinutes} minutes more. I can't wait for you to come back home!! 🤍💙`;
+
+                    msgBox.innerText = message;
+                } else {
+                    msgBox.innerText = emotions[emotion].text;
+                }
+
+                msgBox.style.display = "block";
+
+                setTimeout(() => {
+                    msgBox.style.opacity = "1";
+                }, 10);
+            });
+        });
+    </script>
+</body>
+
+</html>
