@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My babyyy 💖</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <section id="mcq-container" class="mcq" aria-live="polite">
+      <div class="question">Which of these is important to me? 🍿🍫</div>
+
+      <div class="image-display" style="display:flex; gap:16px; justify-content:center; align-items:center;">
+        <img src="img/IMG_7770.jpg" alt="left" style="width:48%; border-radius:18px; box-shadow:0 8px 20px rgba(0,0,0,0.08);" />
+        <img src="img/istockphoto-472157047-612x612.jpg" alt="right" style="width:48%; border-radius:18px; box-shadow:0 8px 20px rgba(0,0,0,0.08);" />
+      </div>
+
+      <div id="mcq-message" class="mcq-message"></div>
+      <div class="small-hint">This can never be my hardest decision, the choice is clear as a day ✨</div>
+
+      <div class="actions">
+        <button id="try-again" class="btn" style="display:none">Try Again 🔁</button>
+        <button id="proceedBtn" class="btn" style="display:none; margin-left:8px">Proceed ➡️</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function() {
+      const leftImg = document.querySelector('.image-display img[alt="left"]');
+      const rightImg = document.querySelector('.image-display img[alt="right"]');
+      if (!leftImg || !rightImg) return;
+
+      // images to rotate through when left image is clicked (will show each once)
+      const images = [
+        'istockphoto-472157047-612x612.jpg',
+        'India-Cricketer-Virat-Kohli-batting-against-New-Zealand-2011-World-Cup-chennai-India.jpg.webp',
+        'nutella-bomboloni-6157464.png.webp'
+      ];
+
+      // initialize rotateIndex so the first click advances to the next image
+      const currentRight = (rightImg.src || '').split('/').pop();
+  let rotateIndex = 0;
+  const startIdx = images.indexOf(currentRight);
+  if (startIdx >= 0) rotateIndex = (startIdx + 1) % images.length;
+  else rotateIndex = 0;
+  let allShown = false; // becomes true when we've displayed the last image
+
+      // make right image inert to clicks
+      rightImg.style.pointerEvents = 'none';
+
+      // make left image look clickable
+      leftImg.style.cursor = 'pointer';
+
+      const msgEl = document.getElementById('mcq-message');
+      const proceedBtn = document.getElementById('proceedBtn');
+
+      leftImg.addEventListener('click', function handler() {
+        // If not yet shown all images, advance the right image
+        if (!allShown) {
+          if (rotateIndex >= images.length) {
+            // should not usually happen, but mark ready
+            allShown = true;
+            if (msgEl) msgEl.textContent = 'Last image shown — click the left image to finish.';
+            return;
+          }
+
+          rightImg.src = 'img/' + images[rotateIndex];
+          rotateIndex += 1;
+
+          // if we've shown the last image, set flag and wait for next click to finalize
+          if (rotateIndex >= images.length) {
+            allShown = true;
+            //if (msgEl) msgEl.textContent = 'Last image shown — click the left image to finish.';
+            // do not remove handler; wait for user to click again
+          }
+
+          return;
+        }
+
+        // allShown === true and left image clicked: finalize (show message + proceed)
+        if (msgEl) msgEl.textContent = 'I love you more than everything! 💖';
+        if (proceedBtn) {
+          proceedBtn.style.display = 'inline-block';
+          proceedBtn.addEventListener('click', () => {
+            window.location.href = 'fourth-page.html';
+          });
+        }
+        // hide the right image and center/resize the left image
+        try {
+          rightImg.style.transition = 'opacity 240ms ease';
+          rightImg.style.opacity = '0';
+          setTimeout(() => { rightImg.style.display = 'none'; }, 250);
+        } catch (e) {}
+    // fade the left image in as it recenters and grows
+    leftImg.style.transition = 'opacity 360ms ease, width 360ms ease, transform 360ms ease';
+    leftImg.style.opacity = '0';
+    leftImg.style.width = '80%';
+    leftImg.style.display = 'block';
+    leftImg.style.margin = '0 auto';
+    leftImg.style.cursor = 'default';
+    // trigger reflow then fade to visible
+    void leftImg.offsetWidth;
+    leftImg.style.opacity = '1';
+        leftImg.removeEventListener('click', handler);
+      });
+    })();
+  </script>
+</body>
+
+</html>

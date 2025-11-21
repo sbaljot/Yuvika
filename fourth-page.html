@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My babyyy 💖</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <section id="lcq-container" class="lcq" aria-live="polite">
+      <div class="question">How much do you think I miss you? 🥺💭</div>
+
+      <div class="options" role="list">
+        <button class="option" role="listitem">Not at all 😅</button>
+        <button class="option" role="listitem">Just a little 😊</button>
+        <button class="option" role="listitem">More than a bit 💕</button>
+        <button class="option" role="listitem">A lot 😭</button>
+      </div>
+
+      <!-- Final congrats area (hidden initially) -->
+      <div id="final-congrats" style="display:none; opacity:0; transition:opacity 620ms ease; margin-top:18px; text-align:center;">
+        <div style="font-size:1.2rem; color:#92495f; font-weight:700;">Tum toh meri jaan ho 💖</div>
+        <div style="margin-top:10px; color:black;">These options do not justify how much I miss you. I miss you so much
+            that if I could, I would kiss you through the screen right now! When I see a dream and chase it, all I imagine
+            is you in that dream and slowly, with every passing day, you have become my purpose and a future reality of 'us'
+            has become my goal. I miss you so much that when you are not here, I make space on the side of me, so I can just feel you
+            sitting with me and kissing my cheek or atleast offering me your cheek so I can kiss it. Oh gosh, I cannot even 
+            begin to tell you how much I miss your smile and how that smile is responsible for shifting my energy into something
+            so poetic and so innocent that I never wanna get out of that feeling. But most of all, I'm just proud to know you. I'm
+            proud to be in your orbit. I'm proud to call you mine. You make me proud in all the big ways. I love you so much my baby.
+        </div>
+        <div style="margin-top:12px;"><button id="final-proceed" class="btn" style="margin-top:8px">Proceed ➡️</button></div>
+      </div>
+
+    </section>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function(){
+      const optsContainer = document.querySelector('.options');
+      const options = optsContainer ? Array.from(optsContainer.querySelectorAll('.option')) : [];
+      const final = document.getElementById('final-congrats');
+      const finalBtn = document.getElementById('final-proceed');
+      if (!optsContainer || options.length === 0) return;
+
+      // Clone options to remove any handlers
+      const clones = options.map(btn => {
+        const clone = btn.cloneNode(true);
+        btn.parentNode.replaceChild(clone, btn);
+        return clone;
+      });
+
+      function showFinal() {
+        optsContainer.style.transition = 'opacity 320ms ease';
+        optsContainer.style.opacity = '0';
+        setTimeout(() => { optsContainer.style.display = 'none'; }, 340);
+        if (final) { final.style.display = 'block'; setTimeout(() => { final.style.opacity = '1'; }, 20); }
+      }
+
+      clones.forEach(c => c.addEventListener('click', (e) => {
+        e.preventDefault();
+        clones.forEach(x => x.disabled = true);
+        showFinal();
+      }));
+
+  if (finalBtn) finalBtn.addEventListener('click', () => { window.location.href = 'final-page.html'; });
+    })();
+  </script>
+</body>
+
+</html>
