@@ -13,21 +13,45 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!message) return; // no UI
 
     if (!val) {
-      message.textContent = "Please enter a username ✨";
+      message.textContent = "Please enter your name, beautiful ✨💖";
       message.className = 'message error';
       return;
     }
 
-    if (val.length < 3) {
-      message.textContent = "That's too short! 😅";
-      message.className = 'message error';
+    // normalize: collapse spaces and lowercase so casing/extra spaces don't matter
+    const norm = val.replace(/\s+/g, ' ').toLowerCase();
+
+    // custom rules requested by the user
+    if (norm === 'yuvika') {
+      message.textContent = 'Hiiiiii babyyyy! Could you please enter your full name? 😊';
+      message.className = 'message info';
       return;
     }
 
-    message.textContent = "Yay! Welcome, beautiful! 🥰🌸";
-    message.className = 'message success';
+    if (norm === 'yuvika sood') {
+      message.textContent = 'Oooh so close, maybe try my last name? 😉';
+      message.className = 'message info';
+      return;
+    }
 
-    setTimeout(() => window.location.href = 'second-page.html', 1000);
+    if (norm === 'yuvika bhomra') {
+      message.textContent = 'Nice! Try with your middle name next? 🌼';
+      message.className = 'message info';
+      return;
+    }
+
+    if (norm === 'yuvika sood bhomra') {
+      message.textContent = 'Welcome meri jaan! 🎉💛';
+      message.className = 'message success';
+      // short pause then proceed
+      setTimeout(() => window.location.href = 'second-page.html', 900);
+      return;
+    }
+
+  // Only the exact full name is accepted. All other names should be rejected.
+  message.textContent = "Aww, that name isn't on the guest list, only Ms. Sood (soon to be Mrs. Bhomra) can enter 💌";
+  message.className = 'message error';
+  return;
   };
 
   // wire any top-level submit button if present (index.html style)
