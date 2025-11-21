@@ -255,3 +255,96 @@ button:hover {
     flex: 1 1 45%;
   }
 }
+
+.cute-table {
+  margin-top: 20px;
+  width: 100%;
+  /* wider */
+  max-width: 420px;
+  /* increase if you want more width */
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  /* slightly smaller text = less height */
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff6fb;
+  box-shadow: 0 8px 20px rgba(255, 147, 204, 0.18);
+  margin-bottom: 20px;
+}
+
+/* HEADER */
+.cute-table thead {
+  background: #ffb3d9;
+  color: white;
+}
+
+.cute-table th {
+  padding: 10px;
+  /* reduced height */
+  font-size: 0.95rem;
+  /* smaller = shorter */
+  border: 1px solid #ff94c8;
+  text-align: center;
+}
+
+/* ROWS */
+.cute-table td {
+  padding: 8px 10px;
+  /* was 18px, now way shorter */
+  font-size: 0.85rem;
+  /* smaller = compact */
+  border: 1px solid #ffcbe6;
+  text-align: center;
+  color: #ff4f8a;
+  background: rgba(255, 230, 242, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.cute-table td:hover {
+  background: #ffd6ec;
+  transition: 0.3s ease;
+  transform: scale(1.03);
+}
+
+.emotion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.emotion-btn {
+  padding: 12px;
+  background: #ffe6f4;
+  border: 1px solid #ffb3d9;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #ff4f8a;
+  transition: 0.3s ease;
+  box-shadow: 0 6px 16px rgba(255, 147, 204, 0.15);
+}
+
+.emotion-btn:hover {
+  background: #ffd0ec;
+  transform: translateY(-4px);
+}
+
+.emotion-message {
+  margin-top: 20px;
+  padding: 16px;
+  min-height: 60px;
+  font-size: 0.95rem;
+  color: #92495f;
+  font-weight: 600;
+  background: #fffafb;
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(255, 147, 204, 0.15);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
